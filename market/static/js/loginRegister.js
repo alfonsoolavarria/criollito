@@ -23,7 +23,6 @@ $(document).ready(function() {
     });
    });
 
-
   $('#msform').submit(function (e) {
     e.preventDefault();
     /*console.log('Registro',e.currentTarget);
