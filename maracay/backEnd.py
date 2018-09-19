@@ -8,16 +8,38 @@ class backStart():
     def __init__(self, request):
         self._request = request
         self.user = 0
-        self.response_data = {'error':[], 'data':[]}
+        self.response_data = {'error':[], 'data':[],'data2':[]}
         self.code = 200
 
     def get(self,params=None):
-        if params and params=='all':
-            try:
-                return self.response_data['data'].append(Products.objects.all())
-            except Exception as e:
-                self.code = 500
-                return self.response_data['error'].append(str(e))
+        self.response_data['cantTotal']= Products.objects.all()
+        #self.response_data['first'] = self._request.GET.get('start',0)
+        #self.response_data['last'] = self._request.GET.get('end',12)
+
+        try:
+            for a in Products.objects.all():
+                self.response_data['data'].append({
+                "category":a.category,
+                "id":a.id,
+                "name":a.name,
+                "cant":a.cant,
+                "description":a.description,
+                "image":a.image,
+                #"price":a.price,
+                })
+            '''for b in Products.objects.filter()[int(self._request.GET.get('start',0)):int(self._request.GET.get('end',12))]:
+                self.response_data['data2'].append({
+                "category":b.category,
+                "id":b.id,
+                "cant":b.cant,
+                "name":b.name,
+                "description":b.description,
+                "image":b.image,
+                #"price":b.price,
+                })'''
+        except Exception as e:
+            self.code = 500
+            return self.response_data['error'].append(str(e))
 
 
 
@@ -83,3 +105,61 @@ class profileBackend():
             print (e)
             self.code = 500
             return self.response_data['error'].append("Error al crear Usuario"+str(e))
+
+
+class filterProducts():
+    def __init__(self, request):
+        self._request = request
+        self.user = 0
+        self.response_data = {'error':[], 'data':[]}
+        self.code = 200
+
+    def allProductsFilter(self):
+        self.response_data['cantTotal']= Products.objects.all()
+        for a in Products.objects.all():
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+
+    def viveresProductsFilter(self):
+        self.response_data['cantTotal']= Products.objects.filter(category=1)
+        for a in Products.objects.filter(category=1):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+    def frigorificoProductsFilter(self):
+        self.response_data['cantTotal']= Products.objects.filter(category=2)
+        for a in Products.objects.filter(category=2):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+    def enlatadosProductsFilter(self):
+        self.response_data['cantTotal']= Products.objects.filter(category=3)
+        for a in Products.objects.filter(category=3):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })

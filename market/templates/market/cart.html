@@ -1,0 +1,44 @@
+<table class="table table-condensed">
+  <thead>
+   <tr class="cart_menu">
+    <td class="image">Articulo</td>
+    <td class="description"></td>
+    <td class="price">Precio</td>
+    <td class="quantity">Cantidad</td>
+    <td class="total">Total</td>
+    <td></td>
+   </tr>
+  </thead>
+  <tbody>
+   {%for articulo in articulos %}
+    <tr>
+     <td class="cart_product">
+      <img src="../../static/{{articulo.Portada}}" alt="">
+     </td>
+     <td class="cart_description">
+      <h4><a href="">{{articulo.Titulo}}
+      {% if articulo.Numero %}
+        {{articulo.Numero}}
+      {% endif %}
+      </a></h4>
+      <p>ID Articulo: {{articulo.Articulo}}</p>
+     </td>
+     <td class="cart_price">
+      <p>{{articulo.Precio}}€</p>
+     </td>
+     <td class="cart_quantity">
+      <div class="cart_quantity_button">
+       <a class="cart_quantity_up" href="/carrito/sumar/{{articulo.Articulo}}/{{articulo.cantidad}}"> + </a>
+       <input class="cart_quantity_input" type="text" name="quantity" value="{{articulo.cantidad}}" autocomplete="off" size="2">
+       <a class="cart_quantity_down" href="/carrito/restar/{{articulo.Articulo}}/{{articulo.cantidad}}"> - </a>
+      </div>
+     </td>
+     <td class="cart_total">
+      <p class="cart_total_price">{{articulo.total}}€</p>
+     </td>
+     <td class="cart_delete">
+      <a class="cart_quantity_delete" href="/carrito/{{articulo.Articulo}}/0"><i class="fa fa-times"></i></a>
+     </td>
+    </tr>
+   {%endfor%}   </tbody>
+ </table>

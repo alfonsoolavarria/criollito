@@ -195,7 +195,18 @@
     /*==================================================================
     [ Cart ]*/
     $('.js-show-cart').on('click',function(){
-        $('.js-panel-cart').addClass('show-header-cart');
+        console.log('pum mandar el post o el get con la data');
+        var carrito = JSON.parse(localStorage.getItem("carrito"));
+        //console.log(carrito);
+        //+JSON.stringify(carrito)
+        window.location = "/cart/shopping/";
+        //$.get("/cart/shopping/",JSON.stringify(carrito));
+        /*$.ajax({
+          url:'/cart/shopping?=data"'+JSON.stringify(carrito)+'" ',
+          type: 'GET',
+          success: function functionName(){}});*///endAjax
+
+        //$('.js-panel-cart').addClass('show-header-cart');
     });
 
     $('.js-hide-cart').on('click',function(){
@@ -214,14 +225,28 @@
 
     /*==================================================================
     [ +/- num product ]*/
-    $('.btn-num-product-down').on('click', function(){
-        var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+    $('.btn-num-product-down').on('click', function(e){
+      var numProduct = Number($(this).next().val());
+      console.log(numProduct);
+      if (numProduct <= parseInt($('.cantHidden').text())) {
+        if(numProduct >= 1){
+          if (numProduct!=1) {
+            $(this).next().val(numProduct - 1);
+          }
+        }
+      }
     });
 
-    $('.btn-num-product-up').on('click', function(){
-        var numProduct = Number($(this).prev().val());
-        $(this).prev().val(numProduct + 1);
+    $('.btn-num-product-up').on('click', function(e){
+      var numProduct = Number($(this).prev().val());
+      if (numProduct <= parseInt($('.cantHidden').text())) {
+        numProduct = numProduct+1;
+        if (numProduct <= parseInt($('.cantHidden').text())) {
+          $(this).prev().val(numProduct);
+        }else {
+          alert("Ya no hay mas productos");
+        }
+      }
     });
 
     /*==================================================================
@@ -270,13 +295,47 @@
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
-        $('.mtext-105').text($('.js-show-modal1').attr("data-name"));//name
-        $('.mtext-106').text($('.js-show-modal1').attr("data-price"));//price
-        $('.stext-102').text($('.js-show-modal1').attr("data-description"));//description
+
+        //clean
+        $('#imageDinamic').empty();
+        $('#imageDinamic2').empty();
+
+        //Set
+        $('.item-slick3').data('thumb',e.currentTarget.dataset.image);
+        $('#imageDinamic2').attr('href',e.currentTarget.dataset.image);
+        $('.mtext-105').text(e.currentTarget.dataset.name);//name
+        $('.mtext-106').text(e.currentTarget.dataset.price);//price
+        $('.stext-102').text(e.currentTarget.dataset.description);//description
+        $('.cantHidden').text(e.currentTarget.dataset.cant);//cantidad de productos
+        $('#imageDinamic').append("<img id='' src='"+e.currentTarget.dataset.image+"' alt=''>");//description
+        $('.js-addcart-detail').attr('data-image',e.currentTarget.dataset.image);
+        $('.js-addcart-detail').attr('data-name',e.currentTarget.dataset.name);
+        $('.js-addcart-detail').attr('data-cant',e.currentTarget.dataset.cant);
+        $('.js-addcart-detail').attr('data-id',e.currentTarget.dataset.id);
+
+        /*apendo el id en el boton up y down*/
+        $('.btn-num-product-down').attr('data-id',e.currentTarget.dataset.id);
+        $('.btn-num-product-up').attr('data-id',e.currentTarget.dataset.id);
+        $('#cantHidden').text(e.currentTarget.dataset.cant);
+
+
+
         $('.js-modal1').addClass('show-modal1');
     });
 
     $('.js-hide-modal1').on('click',function(){
+      $('#imageDinamic').empty();
+      $('#imageDinamic2').empty();
+
+      //Set
+      $('.item-slick3').data('thumb','');
+      $('#imageDinamic2').attr('href','');
+      $('.mtext-104').val('0');//name
+      $('.mtext-105').text('');//name
+      $('.mtext-106').text('');//price
+      $('.stext-102').text('');//description
+      $('.cantHidden').text('');//cantidad de productos
+      $('#imageDinamic').append("<img id='' src='' alt=''>");//description
         $('.js-modal1').removeClass('show-modal1');
     });
 
