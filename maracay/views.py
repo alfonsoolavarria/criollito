@@ -7,6 +7,7 @@ from django.contrib.sessions.models import Session
 from maracay.backEnd import backStart, profileBackend, filterProducts
 from django.shortcuts import render
 from django.core.cache import cache
+from maracay.models import Tools
 from maracay import get_client_ip
 import json
 
@@ -81,7 +82,6 @@ class Login(View):
             __cache_exist = cache.get('cache_ip__%s'%__ip)
 
             if __cache_exist:
-                print ("primeroooo 5 minutoss")
                 return HttpResponse(json.dumps({'code':400,'message':'Debe esperar 5 minutos'}, cls=DjangoJSONEncoder), content_type='application/json')
             else:
                 if __cache_count_error:
@@ -151,7 +151,7 @@ def Delivery(request):
 
 ####CARRITO DE COMPRAS#####
 def CartShopping(request):
-    return render(request, 'market/cartshopping.html', {})
+    return render(request, 'market/cartshopping.html', {'costoenvio':Tools.objects.get(pk=1).costoenvio})
 
 
 #Section Filters

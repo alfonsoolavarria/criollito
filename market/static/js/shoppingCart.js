@@ -29,19 +29,31 @@ $(document).ready(function() {
     if (carrito && carrito.length>0) {
       for (i of carrito){
         if(i.id === item.id){
-          i.cantidad++;//agrego y aumento 1 porque ya existe el item en el carrito
+          if (item.cantidad){
+            i.cantidad = parseInt(i.cantidad)+parseInt(item.cantidad);//agrego y aumento 1 porque ya existe el item en el carrito
+          }else{
+            i.cantidad=parseInt(i.cantidad)+1;
+          }
+          //valido que la cantidad de productos no exceda la cantidad del stock
+          if (parseInt(i.cantidad)>parseInt(item.cant)){
+            i.cantidad=parseInt(item.cant);
+          }
           localStorage.setItem("carrito",JSON.stringify(carrito));
           $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
           return;
         }
       }
-      item.cantidad = 1;//inserto un item nuevo al carrito
+      if (!item.cantidad){
+        item.cantidad = 1;//inserto un item nuevo al carrito
+      }
       carrito.push(item);
       localStorage.setItem("carrito",JSON.stringify(carrito));
       $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
       return;
     }else {
-      item.cantidad = 1;//primera vez que se agrega un item al carrito
+      if (!item.cantidad){
+        item.cantidad = 1;//inserto un item nuevo al carrito
+      }
       carrito.push(item);
       localStorage.setItem("carrito",JSON.stringify(carrito));
       $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito

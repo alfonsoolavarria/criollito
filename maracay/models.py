@@ -23,3 +23,8 @@ class Profile(models.Model):
     tw=models.CharField(max_length=50)
     fb=models.CharField(max_length=50)
     google=models.CharField(max_length=50)
+
+class Tools(models.Model):
+    id=models.AutoField(primary_key=True)
+    costoenvio=models.PositiveSmallIntegerField(default=10)
+    create_at=models.DateTimeField(auto_now_add=True)

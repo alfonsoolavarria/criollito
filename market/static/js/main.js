@@ -232,6 +232,7 @@
         if(numProduct >= 1){
           if (numProduct!=1) {
             $(this).next().val(numProduct - 1);
+            $('.js-addcart-detail').attr('data-cantidad',$(this).next().val(numProduct - 1));
           }
         }
       }
@@ -243,8 +244,9 @@
         numProduct = numProduct+1;
         if (numProduct <= parseInt($('.cantHidden').text())) {
           $(this).prev().val(numProduct);
+          $('.js-addcart-detail').attr('data-cantidad',numProduct);
         }else {
-          alert("Ya no hay mas productos");
+          swal("Ya no hay mas productos", " ", "warning");
         }
       }
     });
@@ -295,7 +297,7 @@
     [ Show modal1 ]*/
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
-
+        console.log('---->',e.currentTarget.dataset);
         //clean
         $('#imageDinamic').empty();
         $('#imageDinamic2').empty();
@@ -312,6 +314,7 @@
         $('.js-addcart-detail').attr('data-name',e.currentTarget.dataset.name);
         $('.js-addcart-detail').attr('data-cant',e.currentTarget.dataset.cant);
         $('.js-addcart-detail').attr('data-id',e.currentTarget.dataset.id);
+        $('.js-addcart-detail').attr('data-price',e.currentTarget.dataset.price);
 
         /*apendo el id en el boton up y down*/
         $('.btn-num-product-down').attr('data-id',e.currentTarget.dataset.id);

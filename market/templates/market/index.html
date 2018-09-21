@@ -187,8 +187,8 @@
                <a href="#" style="left:25%;min-width: 10px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-price="{{value.price}}" data-id="{{value.id}}" data-description="{{value.description}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								 Detalles
                </a>
-               <a href="#" style="left:70%;min-width: 10px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-id="{{value.id}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" id="addItem">
-								 carrito
+               <a href="#" style="left:70%;min-width:118px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-id="{{value.id}}" data-price="{{value.price}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 addModalCar" id="addItem">
+								 Añadir al <i class="zmdi zmdi-shopping-cart" style="margin-left: 5px;"></i>
                </a>
              </div>
              <div class="block2-txt flex-w flex-t p-t-14">
@@ -234,6 +234,12 @@
 		{% include "market/scripts.html" %}
 		<!--<script src="{% static "js/filterProduct.js" %}"></script>-->
 		<script src="{% static "js/shoppingCart.js" %}"></script>
+		<script>
+			$(".addModalCar").on('click',function(){
+				swal("¡ Añadido al Carrito !", " ", "success");
+				//swal("");
+			});
 
+		</script>
 	</body>
 </html>
