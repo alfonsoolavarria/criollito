@@ -3,24 +3,34 @@
 <html lang="en">
 	{% include "market/head.html" %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style media="screen">
-    #places{
-      width: 400px;
-      margin: 50px auto;
-      text-align: center;
-      position: relative;
-      top:10%;
-      margin-bottom: 10%;
-    }
-  </style>
-  <link rel="stylesheet" href="{% static "css/reset.min.css" %}">
 
 <body class="animsition" translate="no">
 	{% include "market/header.html" %}
   <!-- -->
   <div id="places">
-    Cobertura
+		<div class="container" style="margin-top: 160px;">
+			<h4 style="text-align:center;margin-bottom: 3%;"><b>Áreas de Cobertura</b></h4>
+			<div class="row" style="margin-bottom: 60px;">
+				<div class="col-md-3">
+					<img src="/static/images/deliveryCobertura.png" alt="" style="margin-left:10%;margin-top: -10%;" width="190" height="150">
+				</div>
+				<div class="col-md-9">
+					<p style="text-align: justify;"><b>Criollitos Market, C.A,</b> contamos con un servicio de transporte en áreas específicas
+						del Estado Aragua, sólo tenemos cobertura de entrega para las siguientes zonas, lo cual <b style="color:red;">le invitamos a leer atentamente,
+						para que pueda evaluar si su dirección de entrega posee cobertura de nuestros servicios o no</b>:<br><br>
+						<ul class="list-group">
+						  <li class="list-group-item">El Limón</li>
+						  <li class="list-group-item">Palo Negro</li>
+						  <li class="list-group-item">Centro de Maracay</li>
+						  <li class="list-group-item">Turmero</li>
+						  <li class="list-group-item">Cagua</li>
+						</ul><br>
+						Todas las políticas y reglas de nuestras entregas las puede detallar en: <a href="/conditions/">términos y condiciones.</a>
+				</div>
+			</div>
+	  </div>
   </div>
+	{% include "market/banner.html" %}
   <!-- -->
   {% include "market/footer.html" %}
 	<!-- Back to top -->

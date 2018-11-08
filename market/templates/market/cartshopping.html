@@ -90,37 +90,15 @@
             </div>
 
             <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-              <p class="stext-111 cl6 p-t-2">
-                No tenemos registrada ninguna direccion de envio, por favor inicie sesion o actualice sus datos.
+              <p class="stext-111 cl6 p-t-2" style="margin-left: 10px;">
+								{%if direction%}
+									{{direction}}
+								{%else%}
+									No tenemos registrada ninguna direccion de envio, por favor inicie sesion o actualice sus datos.
+								{%endif%}
               </p>
 
               <div class="p-t-15">
-                <!--<span class="stext-112 cl8">
-                  Calculate Shipping
-                </span>-->
-
-                <!--<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                  <select class="js-select2" name="time">
-                    <option>Select a country...</option>
-                    <option>USA</option>
-                    <option>UK</option>
-                  </select>
-                  <div class="dropDownSelect2"></div>
-                </div>-->
-
-                <!--<div class="bor8 bg0 m-b-12">
-                  <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-                </div>
-
-                <div class="bor8 bg0 m-b-22">
-                  <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-                </div>-->
-
-                <!--<div class="flex-w">
-                  <div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-                    Update Totals
-                  </div>
-                </div>-->
 
               </div>
             </div>
@@ -139,7 +117,7 @@
             </div>
           </div>
 
-          <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+          <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" id="paymentBox">
             Pasar por la caja
           </button>
         </div>
@@ -148,16 +126,24 @@
   </div>
 </form>
 
+{% include "market/footer.html" %}
+<!-- Back to top -->
+<div class="btn-back-to-top" id="myBtn">
+<span class="symbol-btn-back-to-top">
+	<i class="zmdi zmdi-chevron-up"></i>
+</span>
+</div>
   {% include "market/scripts.html" %}
 
   <script>
 		var listPriceTotal = 0;
     var carrito = JSON.parse(localStorage.getItem("carrito"));
-		console.log(carrito);
+		//console.log(carrito);
 		if (carrito.length<1) {
 			$(".wrap-table-shopping-cart").css("visibility","hidden");
 			//$(".twoColum").css("visibility","hidden");
-			$(".wrap-table-shopping-cart").after("<h4 style='text-align:center;'>Aun no hay articulos en su carrito ve y <a href='/'>compra</a></h4>")
+			$(".wrap-table-shopping-cart").after("<h4 style='text-align:center;'>Aún no hay artículos en su carrito, anda y <a href='/'>compra</a></h4>");
+			$("#paymentBox").remove();
 		}else{
 			for (var i = 0; i < carrito.length; i++) {
 				$("#dinamicItems").after("<tr class='table_row'>\
@@ -257,6 +243,6 @@
 		}
 
   </script>
-<script src="{% static "js/shoppingCart.js" %}"></script>
+
 </body>
 </html>

@@ -199,78 +199,9 @@
 
 <body class="animsition" translate="no">
 	{% include "market/header.html" %}
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6" style="border:1px solid;border-bottom-color: white;border-left-color: white;border-top-color: white;border-style: dotted;">
-				<form method="post" class="login">{% csrf_token %}
-					<h3 style="font-style: oblique;font-weight: 900;">Iniciar Sesión</h3><br>
-					<h4 style="color:#6c7ae0;">¡Si ya tienes una cuenta entra!</h4>
-					<fieldset id="login" style="">
-						<img id="profile-img" class="profile-img-card" src="{%static "images/avatar.png" %}" />
-			      <input type="text" name="email" placeholder="Email" required/>
-			      <input type="password" name="pass" placeholder="Password" required/>
-			      <button type="submit" class="btn btn-primary btn-block btn-flat" id="loginSubmit">Iniciar Sesión</button>
-						<div class="opciouno" style="margin-top: 10px;">
-							<div class="">
-								<a class="text-center" href="/restore">
-									Olvide mi contraseña
-								</a>
-							</div>
-						</div>
-			    </fieldset>
-				</form>
-			</div>
 
-			<div class="col-md-6">
-			  <!--
-				esta esa y esta opcion que lala
-				<div class="col-md-6 ok">
-			-->
-			  <!-- multistep form -->
-			  <form id="msform">
-					<h3 style="margin-bottom:10%;font-style: oblique;font-weight: 900;">Registro de Usuario</h3>
-			    <!-- progressbar -->
-			    <ul id="progressbar">
-			      <li id="m1" class="active" style="color:black;">Email</li>
-			      <li id="m2" style="color:black;">Datos Básicos</li>
-			      <li id="m3" style="color:black;">Direcciones</li>
-			    </ul>
-			    <!-- fieldsets -->
-			    <fieldset style="position:relative;">
-			      <h2 class="fs-title">Email</h2>
-			      <h3 class="fs-subtitle">Paso 1</h3>
-			      <input type="text" id="1email" name="email" placeholder="Email" required/>
-			      <input type="password" id="1pass" name="pass" placeholder="Password" required/>
-			      <input type="password" id="1cpass" name="cpass" placeholder="Confirm Password" required/>
-						<!--<button type="submit" data-section="1" class="btn btn-primary next action-button" style="">Siguiente</button>-->
-			      <input type="button" name="next" data-section="1" class="next action-button" value="Siguiente" />
-			    </fieldset>
-			    <fieldset style="position:relative;">
-			      <h2 class="fs-title">Datos Básicos</h2>
-			      <h3 class="fs-subtitle">Paso 2</h3>
-			      <input type="text" id="2fname" name="fname" placeholder="Nombre" required/>
-			      <input type="text" id="2lname" name="lname" placeholder="Apellido" required/>
-			      <input type="text" id="2phone" name="phone" placeholder="Celular" />
-			      <textarea name="address" id="2address" placeholder="Dirección" required></textarea>
-						<input type="button" name="previous" class="previous action-button" value="Anterior" />
-			      <!--<button type="submit" class="btn btn-primary previous action-button" style="">Anterior</button>-->
-						<input type="button" name="next" data-section="2" class="next action-button" style="margin-top: -43px;margin-left: 46%;" value="Siguiente" />
-			      <!--<button type="submit" data-section="2" class="btn btn-primary next2 action-button" style="">Siguiente</button>-->
-			    </fieldset>
-			    <fieldset style="position:relative;">
-			      <h2 class="fs-title">Direcciones</h2>
-			      <h3 class="fs-subtitle">Paso 3</h3>
-			      <input type="text" name="twitter" placeholder="Twitter" />
-			      <input type="text" name="facebook" placeholder="Facebook" />
-			      <input type="text" name="gplus" placeholder="Google Plus" />
-			      <input type="button" name="previous" class="previous action-button" value="Anterior" />
-						<button type="submit" class="btn btn-primary " id="loginRegister" style="width: 30%;position: absolute;top: 80%;left: 46%;padding: 5px;">Enviar</button>
-			      <!--<input type="submit" name="submit" class="submit action-button" value="Enviar" style="margin-top: -42px;margin-left:50%;"/>-->
-			    </fieldset>
-			  </form>
-			</div>
-		</div>
-	</div>
+	{% include "market/registerLogin.html" %}
+
   <!-- -->
 	{% include "market/footer.html" %}
 	<!-- Back to top -->
@@ -279,12 +210,11 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-
+	 <input id="flagReload" style="visibility:hidden;position:fixed;" value="0">
 		{% include "market/scripts.html" %}
     <script>
-  window.console = window.console || function(t) {};
-</script>
+  		window.console = window.console || function(t) {};
+		</script>
     <!--<script src="//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>-->
 		<script src="{% static "js/codepent.js" %}"></script>
     <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
@@ -293,7 +223,5 @@
 		<script src="{% static "js/loginRegister.js" %}"></script>
 		<!-- Registro dinamico -->
 		<script src="{% static "js/registerDinamic.js" %}"></script>
-
-
-</body>
+	</body>
 </html>

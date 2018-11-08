@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include "market/head.html" %}
+	<style>
+		.abajo {
+    	border-bottom: 1px solid #ccc;
+		}
+	</style>
+<body class="animsition">
+	{% include "market/header.html" %}
+
+
+  <div class="container" style="margin-top:100px;font-size:medium;">
+    <div class="row">
+       <div class="col-md-12" style="margin-top:20px;margin-bottom:100px;text-align:center;">
+         <div class="">
+            <img class="" style="width:60px;height:60px;" src="{%static "images/confirmation.png" %}" alt="User Image">
+            <h4><b>Ya hemos recibido su compra</b></h4>
+            <h5>Enviamos los detalles de la factura a su email {{email}}</h5>
+         </div>
+       </div>
+    </div>
+    <div class="row" style="border: 1px solid darkgray;">
+       <div class="col-md-12" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+         <div class="">
+           <img class="rounded-circle" style="margin-top:-60px;width:60px;height:60px;" src="{%static "images/orderfinal.png" %}" alt="User Image">
+            <h4 style="color:#6c7ae0"><b>Su pedido fue el siguiente</b></h4>
+         </div>
+       </div>
+			 <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+         <div class="">
+					 <h4 style='font-size: 18px;'><b>Producto</b></h4>
+         </div>
+       </div>
+			 <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+				 <div class="">
+					 <h4 style='font-size: 18px;'><b>Precio/Cantidad</b></h4>
+				 </div>
+			 </div>
+			 <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+         <div class="">
+					 <h4 style='font-size: 18px;'><b>Nombre</b></h4>
+         </div>
+       </div>
+			 <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+         <div class="">
+					 <h4 style='font-size: 18px;'><b>Total</b></h4>
+         </div>
+       </div>
+      <label id="dinamicProductsCar" style="visibility:hidden;position:fixed;"></label>
+			{%for value in compra%}
+				{%for k,v in value.items%}
+					{%if k == 'image'%}
+					<div class='col-md-3' style='margin-top:20px;margin-bottom:40px;text-align:center;'>
+						<div class=''>
+							<img style='border-radius:10px;width: 100px;' src='/static/{{v}}' alt='IMG'>
+						</div>
+					</div>
+					{%else%}
+					<div class='col-md-3' style='margin-top:20px;margin-bottom:40px;text-align:center;'>
+			      <div class=''>
+			         <h4 style='font-size: 18px;'>{{v}}</h4>
+			      </div>
+			    </div>
+					{%endif%}
+				{%endfor%}
+			{%endfor%}
+      <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+        <div class="">
+           <h4 style="margin-bottom:4px;font-size: 19px;"><b>Sub-Total de su pedido:</b></h4>
+           <h4 style="margin-bottom:4px;font-size: 19px;"><b>Costo de entrega:</b></h4>
+           <h4 style="font-size: 19px;"><b>Total:</b></h4>
+        </div>
+      </div>
+      <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+        <div class="">
+        </div>
+      </div>
+      <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+        <div class="">
+        </div>
+      </div>
+      <div class="col-md-3" style="margin-top:20px;margin-bottom:40px;text-align:center;">
+        <div class="">
+           <h4 id="totalCompraText" style="font-size:18px;text-align:center;">{{totalGeneral}}</h4>
+           <h4 id="totalCompraText2" style="font-size:18px;text-align:center;">{{costoenvio}}</h4>
+           <h4 id="totalCompraText3" style="font-size:18px;text-align:center;">{{totalCompleto}}</h4>
+        </div>
+      </div>
+    </div>
+		<div class="row">
+			<div class="col-md-4">
+
+			</div>
+		</div>
+  </div>
+
+	<!-- Product -->
+
+	{% include "market/footer.html" %}
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+	<!-- Modal1 -->
+	{% include "market/modalDetails.html" %}
+
+
+		{% include "market/scripts.html" %}
+
+
+	</body>
+  <script>
+	var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+
+		$("#cartCesta").off('click');
+		history.pushState(null, null, location.href);
+	    window.onpopstate = function () {
+	        history.go(1);
+	    };
+
+		// var decodedString = Base64.decode(localStorage.getItem("carrito"));
+			// console.log(decodedString);
+    // var carrito = JSON.parse(localStorage.getItem("carrito"));
+		// console.log('decifrado',decodedString);
+    // var carrito = JSON.parse(decodedString);
+    // if (carrito.length>0) {
+		// 	var totalCompra = 0;
+    //   for (var i = 0; i < carrito.length; i++) {
+    //     $("#dinamicProductsCar").after("\
+    //     <div class='col-md-3 abajo' style='margin-top:20px;margin-bottom:40px;text-align:center;'>\
+    //         <div class=''>\
+    //            <img style='border-radius:10px;width: 100px;' src='"+carrito[i].image+"' alt='IMG'>\
+    //         </div>\
+    //       </div>\
+    //     <div class='col-md-3 abajo' style='margin-top:20px;margin-bottom:40px;text-align:center;'>\
+    //         <div class=''>\
+    //            <h4 style='font-size: 18px;'>"+carrito[i].name+"</h4>\
+    //         </div>\
+    //       </div>\
+    //     <div class='col-md-3 abajo' style='margin-top:20px;margin-bottom:40px;text-align:center;'>\
+    //         <div class=''>\
+    //            <h4 style='font-size: 18px;'>"+carrito[i].price+" / "+carrito[i].cantidad+"</h4>\
+    //         </div>\
+    //       </div>\
+    //     <div class='col-md-3 abajo' style='margin-top:20px;margin-bottom:40px;text-align:center;'>\
+    //         <div class=''>\
+    //            <h4 style='font-size: 18px;'>"+parseFloat(carrito[i].price)*parseInt(carrito[i].cantidad)+"</h4>\
+    //         </div>\
+    //       </div>"
+    //     );
+		//
+		// 		totalCompra = totalCompra + (parseFloat(carrito[i].price)*parseInt(carrito[i].cantidad));
+    //   }
+		// 	$("#totalCompraText").text(totalCompra)
+		// 	$("#totalCompraText3").text(totalCompra+parseInt($("#totalCompraText2").text()));
+    // }
+
+		// console.log(carrito);
+		// console.log(typeof(carrito));
+
+		// var test = JSON.stringify(carrito);
+		// console.log(test);
+		// console.log(typeof(test));
+
+
+
+		// var string = test;
+		// var encodedString = Base64.encode(string);
+		// console.log('cifrado',encodedString);
+		// localStorage.setItem("carrito",JSON.stringify(carrito));
+
+		localStorage.clear();
+  </script>
+</html>

@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .views import (Maracay, Account, Conditions,Login,Logout,Profile, Help, We,
     Places, Payment, Delivery, ControlAdmin, AllProducts,FrigorificoProducts,
-    EnlatadosProducts,ViveresProducts, CartShopping)
+    EnlatadosProducts,ViveresProducts, CartShopping, CartOrder, ConfimationOrder,HelpForm,
+    CartOrderEntrega)
 from django.conf import settings
 from django.conf.urls import url
 
@@ -14,6 +15,7 @@ urlpatterns = [
     url(r'^logout/$', csrf_exempt(Logout.as_view()), name='logout'),
     url(r'^profile/$', csrf_exempt(Profile.as_view()), name='profile'),
     url(r'^help/$', Help, name='help'),
+    url(r'^help/form/$', csrf_exempt(HelpForm), name='helpform'),
     url(r'^we/$', We, name='we'),
     url(r'^places/$', Places, name='places'),
     url(r'^payment/$', Payment, name='payment'),
@@ -26,5 +28,12 @@ urlpatterns = [
     url(r'^enlatados/$', EnlatadosProducts, name='admin'),
     #carrito de compras
     url(r'^cart/shopping/$', csrf_exempt(CartShopping), name='cartshopping'),
+    #caja de compras
+    url(r'^cart/order/$', csrf_exempt(CartOrder), name='cartsorder'),
+    #compra finalizada
+    url(r'^orden/entrega/$', csrf_exempt(CartOrderEntrega), name='cartsorderentrega'),
+    #confirmacion de pedido
+    url(r'^confirmacion/$', csrf_exempt(ConfimationOrder), name='confirmacioncompra'),
+
 
 ]

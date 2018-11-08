@@ -5,26 +5,30 @@ $(document).ready(function() {
   if(localStorage.getItem("carrito")){
     var carrito = JSON.parse(localStorage.getItem("carrito"));
     $('#cartCesta').attr('data-notify',carrito.length);
+    $('#cartCesta2').attr('data-notify',carrito.length);
   }
 
   /*click en add al carro*/
   document.addEventListener("click",function(ev){
-    ev.preventDefault();
-
     if(!localStorage.getItem("carrito")){
       localStorage.setItem('carrito','[]');
     }
 
     if(ev.target.id === "addItem"){
+        ev.preventDefault();
         var id = ev.target.dataset;
         agregarItem(id);//mando lo que agregare
+    }
+    /*pasar por caja*/
+    if(ev.target.id === "paymentBox"){
+        ev.preventDefault();
+        window.location =  "/cart/order/";
     }
   });
 
 
   /*add al carro*/
   function agregarItem(item){
-    console.log('----ITEM',item);
     var carrito = JSON.parse(localStorage.getItem("carrito"));
     if (carrito && carrito.length>0) {
       for (i of carrito){
@@ -40,6 +44,7 @@ $(document).ready(function() {
           }
           localStorage.setItem("carrito",JSON.stringify(carrito));
           $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
+          $('#cartCesta2').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
           return;
         }
       }
@@ -49,6 +54,7 @@ $(document).ready(function() {
       carrito.push(item);
       localStorage.setItem("carrito",JSON.stringify(carrito));
       $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
+      $('#cartCesta2').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
       return;
     }else {
       if (!item.cantidad){
@@ -57,9 +63,12 @@ $(document).ready(function() {
       carrito.push(item);
       localStorage.setItem("carrito",JSON.stringify(carrito));
       $('#cartCesta').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
+      $('#cartCesta2').attr('data-notify',carrito.length);//notificacion de cantidad de productos en el carrito
     }
 
 
   }
+
+
 
 });

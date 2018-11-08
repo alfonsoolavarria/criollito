@@ -3,36 +3,28 @@
 <html lang="en">
 	{% include "market/head.html" %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style media="screen">
-    #we{
-      width: 400px;
-      margin: 50px auto;
-      text-align: center;
-      position: relative;
-      top:10%;
-      margin-bottom: 10%;
-    }
-  </style>
-  <link rel="stylesheet" href="{% static "css/reset.min.css" %}">
 
 <body class="animsition" translate="no">
 	{% include "market/header.html" %}
   <!-- -->
-  <div class="container" id="we">
-	<div class="row">
-		<div class="col-md-3">
-			<img src="/static/images/quienessomos.jpg" alt="" style="margin-left: -100%;" width="130" height="100">
+  <div class="container" id="we" style="margin-top: 160px;">
+		<h4 style="text-align:center;margin-bottom: 3%;"><b>¿Quiénes Somos?</b></h4>
+		<div class="row" style="margin-bottom: 60px;">
+			<div class="col-md-3">
+				<img src="/static/images/quienessomos.jpg" alt="" style="margin-left:10%;margin-top: -10%;" width="190" height="150">
+			</div>
+			<div class="col-md-9">
+				<p style="text-align: justify;"><b>Criollitos Market, C.A,</b> es una empresa de profesionales de multiples áreas, que se dedica a la atención
+					y facilidad de compras de los servicios que ofrecemos, con la intención de hacerte ahorrar tiempo en colas y buscando artículos de compra
+					de un lugar a otro, y no solo eso, sino que te <b>lo llevamos hasta tu casa</b>.</p>
+					<div class="icon" style="margin-left:35%;">
+						<img src="/static/images/delivery.png" alt="">
+					</div>
+			</div>
 		</div>
-		<div class="col-md-9">
-			<p style="text-align: justify;">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el
-				texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
-				desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años,
-				sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los
-				60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición,
-				como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
-		</div>
-	</div>
   </div>
+
+	{% include "market/banner.html" %}
   <!-- -->
   {% include "market/footer.html" %}
 	<!-- Back to top -->

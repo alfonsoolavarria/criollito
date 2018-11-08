@@ -3,23 +3,28 @@
 <html lang="en">
 	{% include "market/head.html" %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style media="screen">
-    #payment{
-      width: 400px;
-      margin: 50px auto;
-      text-align: center;
-      position: relative;
-      top:10%;
-      margin-bottom: 10%;
-    }
-  </style>
-  <link rel="stylesheet" href="{% static "css/reset.min.css" %}">
 
 <body class="animsition" translate="no">
 	{% include "market/header.html" %}
   <!-- -->
   <div id="payment">
-    Forma de Pago
+		<div class="container" style="margin-top: 160px;">
+			<h4 style="text-align:center;margin-bottom: 3%;"><b>Formas de Pago</b></h4>
+			<div class="row" style="margin-bottom: 60px;">
+				<div class="col-md-3">
+					<img src="/static/images/payment.png" alt="" style="margin-left:10%;margin-top: -10%;" width="190" height="150">
+				</div>
+				<div class="col-md-9">
+					<p style="text-align: justify;"><b>Criollitos Market, C.A,</b> le ofrecemos opciones de pago para hacerle la compra
+						lo mas facil, seguro y rapido posible.<br><br> Puede hacer transferencias por medio de cualquier banco a nuestra cuenta
+						la cual podra ver al momento de procesar su pedido, una vez verificado el pago procederemos a comunicarnos con usted via telefonica,
+						para coordinar la entrega.<br><br>
+
+						Tambien puede hacer pagos por medio de Paypal dentro o fuera del pais, para enviarle sus compras a familiares y amigos segun la
+						<a href="/places/">cobertura</a> que brindamos para nuestros servicios.
+				</div>
+			</div>
+	  </div>
   </div>
   <!-- -->
   {% include "market/footer.html" %}
