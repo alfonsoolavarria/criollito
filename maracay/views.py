@@ -298,18 +298,22 @@ def ConfimationOrder(request):
     'costoenvio':Tools.objects.get(pk=1).costoenvio,
     'code':200,
     'compra':[],
+    'tipoPago':'',
     }
     compra = PurchaseConfirmation.objects.filter(user=dataUser).last()
     allProducts = PurchaseConfirmation.objects.filter(code=compra.code)
     totalGeneral=0
     for value in allProducts:
+        data['tipoPago'] = value.payment_type
+        data['code'] = value.code
         data['compra'].append({
-        'image':value.product.image,
         'name':value.product.name,
         'price':str(value.product.price)+' / '+str(value.cant_product),
+        'image':value.product.image,
         'total':float(value.product.price)*int(value.cant_product),
         })
         totalGeneral = totalGeneral+(float(value.product.price)*int(value.cant_product))
+
     data['totalGeneral'] = totalGeneral
     data['totalCompleto'] = data['totalGeneral']+data['costoenvio']
     return render(request, 'market/confirmationOrder.html',data)

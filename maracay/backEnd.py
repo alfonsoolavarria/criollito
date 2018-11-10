@@ -97,14 +97,17 @@ class backStart():
                     totalGeneral = totalGeneral+(float(value.product.price)*int(value.cant_product))
                 carroEmail['totalGeneral'] = totalGeneral
                 carroEmail['totalCompleto'] = carroEmail['totalGeneral']+Tools.objects.get(pk=1).costoenvio
-                print (carroEmail)
+
                 msg_html = render_to_string('market/facturaCompra.html',
                     {
                         'asunto':'Factura' ,
                         'payment_type':self._request.POST['pago'],
                         'email':self._request.user,
-                        'carro':carroEmail,
+                        'carro':carroEmail['compra'],
+                        'totalGeneral':carroEmail['totalGeneral'],
+                        'totalCompleto':carroEmail['totalCompleto'],
                         'codigo':tokenCode,
+                        'costoEnvio':Tools.objects.get(pk=1).costoenvio,
                     })
 
                 send_mail(

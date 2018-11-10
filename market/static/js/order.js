@@ -3,6 +3,11 @@ $(document).ready(function() {
   $("#selectFirst").trigger( "click" );
 
   $("#paymentBox2").click(function(e){
+    $("#paymentBox2").remove();
+
+    $("#sendUserSection1").css("visibility","hidden");
+    $("#sendUserSection2").css("visibility","hidden");
+    $("#preloader").css("visibility","visible");
 
     var tipodePago = ''
 
@@ -28,9 +33,11 @@ $(document).ready(function() {
       }else {
         //poner un tootip
         alertify.error(result.message);
+        window.location.href = '/confirmacion';
       }
     }).fail(function(error) {
       console.log(error.responseText);
+      window.location.href = '/confirmacion';
     });
   });
 
