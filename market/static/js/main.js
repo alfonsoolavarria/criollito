@@ -227,12 +227,11 @@
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(e){
       var numProduct = Number($(this).next().val());
-      console.log(numProduct);
       if (numProduct <= parseInt($('.cantHidden').text())) {
         if(numProduct >= 1){
           if (numProduct!=1) {
             $(this).next().val(numProduct - 1);
-            $('.js-addcart-detail').attr('data-cantidad',$(this).next().val(numProduct - 1));
+            $('.js-addcart-detail').attr('data-cantidad',numProduct - 1);
           }
         }
       }

@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
-from maracay.models import Product, Profile, PurchaseConfirmation, Tools
+from maracay.models import Product, Profile, PurchaseConfirmation, Tools, purchaseHistory
 from django.db import transaction
 import json,random, string
 from threading import Thread
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
+from datetime import datetime, timedelta, date, time
+import schedule, time, pytz, datetime
 
 
 class backStart():
@@ -48,6 +50,7 @@ class backStart():
     def guardaCompra(self):
         def hilo2():
             try:
+                print (self._request.POST)
                 ########################codigo de seguridad de compra###################
                 def ran_gen(size, chars=string.ascii_uppercase + string.digits):
                     return ''.join(random.choice(chars) for x in range(size))
@@ -74,15 +77,25 @@ class backStart():
                         code=dataSave['code'],
                         user=user,
                         payment_type=self._request.POST['pago'],
-                        confirmation=False,
+                        confirmation=2,
                         product=dataSave['product'],
                         start_date=dataSave['start_date'],
                         cant_product=dataSave['cant_product'],
                     )
+                    dataSave['product'].cant = dataSave['product'].cant - int(dataSave['cant_product'])
+                    dataSave['product'].save()
                     compras.save()
                     dataSave = {}
                     productId = 0
 
+                #save historial################
+                historialCompras = purchaseHistory.objects.create(
+                    code_purchase=tokenCode,
+                    user=user,
+                    total=''
+                )
+                historialCompras.save()
+                ###############################
                 #Envio la factura por email
                 carroEmail = {'compra':[]}
                 allProducts = PurchaseConfirmation.objects.filter(code=compras.code)
@@ -193,6 +206,21 @@ class profileBackend():
             return self.response_data['error'].append("Error al crear Usuario"+str(e))
 
 
+    def accountData(self):
+        dataA = purchaseHistory.objects.all()
+        for a in dataA:
+            tabladecompra = PurchaseConfirmation.objects.filter(code=a.code_purchase).last()
+            self.response_data['data'].append({
+            "code_purchase":a.code_purchase,
+            "total":a.total,
+            "state":tabladecompra.confirmation,
+            "payment_type":tabladecompra.payment_type,
+            "start_date":tabladecompra.start_date-timedelta(hours=4),
+            })
+
+
+
+
 class filterProducts():
     def __init__(self, request):
         self._request = request
@@ -238,6 +266,63 @@ class filterProducts():
             #"price":a.price,
             })
     def enlatadosProductsFilter(self):
+        self.response_data['cantTotal']= Product.objects.filter(category=3)
+        for a in Product.objects.filter(category=3):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+
+class adminSite():
+    def __init__(self, request):
+        self._request = request
+        self.user = 0
+        self.response_data = {'error':[], 'data':[]}
+        self.code = 200
+
+    def dataProductUser(self):
+        self.response_data['cantTotal']= Product.objects.all()
+        for a in Product.objects.all():
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+
+    def viveresProductsFilterAdmin(self):
+        self.response_data['cantTotal']= Product.objects.filter(category=1)
+        for a in Product.objects.filter(category=1):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+    def frigorificoProductsFilterAdmin(self):
+        self.response_data['cantTotal']= Product.objects.filter(category=2)
+        for a in Product.objects.filter(category=2):
+            self.response_data['data'].append({
+            "category":a.category,
+            "id":a.id,
+            "name":a.name,
+            "cant":a.cant,
+            "description":a.description,
+            "image":a.image,
+            #"price":a.price,
+            })
+    def enlatadosProductsFilterAdmin(self):
         self.response_data['cantTotal']= Product.objects.filter(category=3)
         for a in Product.objects.filter(category=3):
             self.response_data['data'].append({

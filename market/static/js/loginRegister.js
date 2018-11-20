@@ -19,7 +19,8 @@ $(document).ready(function() {
         }
       }else {
         //poner un tootip
-        alertify.error('intente de nuevo '+result.message);
+        swal("Intente de nuevo", " ", "warning");
+        //alertify.error('intente de nuevo '+result.message);
       }
     }).fail(function(error) {
       console.log(error.responseText);
@@ -53,7 +54,8 @@ $(document).ready(function() {
 
       var validate = validateEmail(e.currentTarget[1].value);
       if (!validate ) {
-        alertify.error("Email incorrecto");
+        swal("Email incorrecto", " ", "warning");
+        //alertify.error("Email incorrecto");
         return false;
       }
 
@@ -88,7 +90,8 @@ $(document).ready(function() {
       });
 
     }else {
-      alertify.error('Hace falta llenar un campo requerido');
+      swal("Hace falta llenar un campo requerido", " ", "warning");
+      //alertify.error('Hace falta llenar un campo requerido');
     }
 
 

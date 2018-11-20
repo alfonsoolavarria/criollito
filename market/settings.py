@@ -25,7 +25,7 @@ SECRET_KEY = '3(%m#=&3u)%dxq$#%8)&5+kyy3(5y0d9dt-f@lvj7!3cgv8$-e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','190.72.52.130']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/alfonso-dev/nosotros/market/market/templates'],
+        'DIRS': ['/home/alfonso/Dev/Proyects/criollito/market/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +76,15 @@ WSGI_APPLICATION = 'market.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'TIMEOUT':2,
+        'NAME': 'criollitos',
+        'USER': 'postgres',
+        'PASSWORD': '1q2w3e4r',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

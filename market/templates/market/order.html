@@ -185,20 +185,49 @@ background-clip: content-box;
 
 								 <form style="margin-left: 70px;margin-top: 20px;">
 									 <div class="radio" style="margin-bottom: 10px;">
-										 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+										 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios1" value="1" >
 										 <label style="display:initial;">
-											 Transferencia Bancaria (BsS)
+											 Transferencia Bancaria "BANESCO" (BsS)
 										 </label>
-										 <label>
-											 Aceptamos transferencia desde todos los bancos, su compra se reservará por 1 día hábil
-											 mientras nos reporta su pago y confirmamos la transferencia realizada.</label>
+										 <label id="banescoTransf" style="margin-top:10px;visibility:hidden;position:fixed;">
+											 Una vez realizada la compra, con esta opciòn tendra un màximo de 1 hora para hacer su transferencia
+											 <b>BANESCO-BANESCO</b> y <b>REPORTAR SU PAGO</b> de lo contrario su compra serà <b>anulada</b>.
+											</label>
 										 </div>
-										 <div class="radio">
-											 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										 <!-- <div class="radio" style="margin-bottom: 10px;">
+											 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
 											 <label style="display:initial;">
-												 Paypal
+												 Transferencia Bancaria "OTROS BANCOS" (BsS)
+											 </label>
+											 <label id="otherTransf">
+												 Una vez realizada la compra, con esta opcion tendra un maximo de 1 hora para hacer su transferencia
+												 <b>BANESCO-BANESCO</b> y <b>REPORTAR SU PAGO</b> de lo contrario su compra sera <b>anulada</b>.
+											 </label>
+											 </div> -->
+											 <br>
+											 <div class="radio" style="margin-bottom: 10px;">
+												 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios2" value="2" >
+												 <label style="display:initial;">
+													 Pago Mòvil (BsS)
+												 </label>
+												 <label id="movilTransf" style="margin-top:10px;visibility:hidden;position:fixed;">
+													 Una vez realizada la compra, con esta opciòn tendra un màximo de 1 hora para hacer su transferencia
+													 <b>PAGO-MÒVIL</b> y <b>REPORTAR SU PAGO</b> de lo contrario su compra serà <b>anulada</b>.
+												 </label>
+											 </div>
+											 <br>
+
+										 <div class="radio">
+											 <input style="display:initial;" type="radio" name="optionsRadios" id="optionsRadios3" value="3">
+											 <label style="display:initial;">
+												 PayPal
+											 </label>
+											 <label id="paypalTransf" style="margin-top:10px;visibility:hidden;position:fixed;">
+												 Una vez realizada la compra, con esta opciòn tendra un màximo de 1 hora para hacer su transferencia
+												 <b>PayPal</b> y <b>REPORTAR SU PAGO</b> de lo contrario su compra serà <b>anulada</b>.
 											 </label>
 										 </div>
+										 <br>
 									 </form>
 							 </div>
 						 </div>
@@ -250,6 +279,32 @@ background-clip: content-box;
 
 
 		<script>
+		$('.radio').change(function(){
+			if ($('#optionsRadios1').is(':checked')) {
+				$("#banescoTransf").css("visibility","visible");
+				$("#banescoTransf").css("position","static");
+	    }else{
+				$("#banescoTransf").css("visibility","hidden");
+				$("#banescoTransf").css("position","fixed");
+			}
+	    if ($('#optionsRadios2').is(':checked')) {
+				$("#movilTransf").css("visibility","visible");
+				$("#movilTransf").css("position","static");
+	    }else{
+				$("#movilTransf").css("visibility","hidden");
+				$("#movilTransf").css("position","fixed");
+			}
+
+	    if ($('#optionsRadios3').is(':checked')) {
+				$("#paypalTransf").css("visibility","visible");
+				$("#paypalTransf").css("position","static");
+	    }else{
+				$("#paypalTransf").css("visibility","hidden");
+				$("#paypalTransf").css("position","fixed");
+			}
+
+      });
+
 			var listPriceTotal = 0;
 			var carrito = JSON.parse(localStorage.getItem("carrito"));
 			if (carrito.length>0) {
@@ -289,6 +344,7 @@ background-clip: content-box;
 					$('#minPlus3').attr('class','fa fa-plus')
 				}
 			 });
+
 		</script>
   </body>
 </html>

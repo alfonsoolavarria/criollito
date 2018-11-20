@@ -69,12 +69,18 @@
 	             <div class="block2-pic hov-img0">
 	               <img style="border-radius:60px;" src="{% static value.image %}" alt="IMG-PRODUCT">
 	               <!--modal=js-show-modal1 -->
-	               <a href="#" style="left:25%;min-width: 10px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-price="{{value.price}}" data-id="{{value.id}}" data-description="{{value.description}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-									 Detalles
-	               </a>
-	               <a href="#" style="left:70%;min-width:118px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-id="{{value.id}}" data-price="{{value.price}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 addModalCar" id="addItem">
-									 Añadir al <i class="zmdi zmdi-shopping-cart" style="margin-left: 5px;"></i>
-	               </a>
+								 {%if value.cant != 0 %}
+		               <a href="#" style="left:25%;min-width: 10px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-price="{{value.price}}" data-id="{{value.id}}" data-description="{{value.description}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+										 Detalles
+		               </a>
+		               <a href="#" style="left:70%;min-width:118px;" data-image="/static/{{value.image}}" data-name="{{value.name}}" data-cant="{{value.cant}}" data-id="{{value.id}}" data-price="{{value.price}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 addModalCar" id="addItem">
+										 Añadir al <i class="zmdi zmdi-shopping-cart" style="margin-left: 5px;"></i>
+		               </a>
+									{%else%}
+										<label style="color:red;" class="block2-btn flex-c-m stext-103 size-102 bg0 bor2 p-lr-15 trans-04">
+											No disponible
+										</label>
+									{%endif%}
 	             </div>
 	             <div class="block2-txt flex-w flex-t p-t-14">
 		           	<div class="block2-txt-child1 flex-col-l ">
@@ -85,8 +91,8 @@
 		            </div>
 		            <div class="block2-txt-child2 flex-r p-t-3">
 	              	<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-		              	<img class="icon-heart1 dis-block trans-04" src="{% static "images/icons/icon-heart-01.png" %}">
-		                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="{% static "images/icons/icon-heart-02.png" %}">
+		              	<!-- <img class="icon-heart1 dis-block trans-04" src="{% static "images/icons/icon-heart-01.png" %}">
+		                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="{% static "images/icons/icon-heart-02.png" %}"> -->
 	                </a>
 								</div>
 		           </div>

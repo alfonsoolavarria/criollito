@@ -3,42 +3,64 @@ $(document).ready(function() {
   $("#selectFirst").trigger( "click" );
 
   $("#paymentBox2").click(function(e){
-    $("#paymentBox2").remove();
+    swal({
+     title:"¿Està seguro de continuar con la compra?",
+     text:"",
+     icon:"warning",
+     buttons:['No','Si'],
+     dangerMode:true,
+   }).then((willDelete)=>{
+     if (willDelete){
 
-    $("#sendUserSection1").css("visibility","hidden");
-    $("#sendUserSection2").css("visibility","hidden");
-    $("#preloader").css("visibility","visible");
+          var tipodePago = ''
 
-    var tipodePago = ''
+          if ($('#optionsRadios1').is(':checked')) {
+            tipodePago = 'Transferencia'
+          }
+          if ($('#optionsRadios2').is(':checked')) {
+            tipodePago = 'Pago Mòvil'
+          }
+          if ($('#optionsRadios3').is(':checked')) {
+            tipodePago = 'Paypal'
+          }
 
-    if ($('#optionsRadios1').is(':checked')) {
-      tipodePago = 'Transferencia'
-    }
-    if ($('#optionsRadios2').is(':checked')) {
-      tipodePago = 'Paypal'
-    }
-    var carrito = JSON.parse(localStorage.getItem("carrito"));
-    var fechadeinicio = moment().utc().format("YYYY-MM-DD HH:mm");// en utc
+          if (tipodePago == '') {
+            swal("Debe seleccionar una forma de pago", " ", "warning");
+            //alertify.error("");
+            return false;
+          }
+          $("#paymentBox2").remove();
+          $("#sendUserSection1").css("visibility","hidden");
+          $("#sendUserSection2").css("visibility","hidden");
+          $("#preloader").css("visibility","visible");
 
-    $.post('/orden/entrega/',{
-      pago:tipodePago,
-      carrito:JSON.stringify(carrito),
-      start_date:fechadeinicio,
-    }).done(function (result) {
-      if (result.code==200) {
-        var delayInMilliseconds = 3000; //menos de 1 second
-        setTimeout(function() {
-          window.location.href = '/confirmacion';
-        }, delayInMilliseconds);
-      }else {
-        //poner un tootip
-        alertify.error(result.message);
-        window.location.href = '/confirmacion';
-      }
-    }).fail(function(error) {
-      console.log(error.responseText);
-      window.location.href = '/confirmacion';
-    });
+          var carrito = JSON.parse(localStorage.getItem("carrito"));
+          var fechadeinicio = moment().utc().format("YYYY-MM-DD HH:mm");// en utc
+
+          $.post('/orden/entrega/',{
+            pago:tipodePago,
+            total:$("#totalDinamicFinal").val(),
+            carrito:JSON.stringify(carrito),
+            start_date:fechadeinicio,
+          }).done(function (result) {
+            if (result.code==200) {
+              var delayInMilliseconds = 3000; //menos de 1 second
+              setTimeout(function() {
+                window.location.href = '/confirmacion';
+              }, delayInMilliseconds);
+            }else {
+              //poner un tootip
+              swal(result.message, " ", "warning");
+              //alertify.error(result.message);
+              window.location.href = '/confirmacion';
+            }
+          }).fail(function(error) {
+            console.log(error.responseText);
+            window.location.href = '/confirmacion';
+          });
+     }
+   })
+
   });
 
   $("#sendUserSection1").click(function(e){

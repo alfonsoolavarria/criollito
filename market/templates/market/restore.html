@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include "market/head.html" %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static "css/reset.min.css" %}">
+  <link rel="stylesheet" href="{% static "css/forgot.css" %}">
+
+<body class="animsition" translate="no">
+  	{% include "market/header.html" %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" style="">
+				<form class="forgot">{% csrf_token %}
+					<h3 style="font-style: oblique;font-weight: 900;">Recuperaciòn de Clave</h3><br>
+					<fieldset id="forgotUser" style="">
+						<img id="profile-img" class="profile-img-card" src="{%static "images/forgot.png" %}" />
+            <label style="margin-bottom:5px;">Recibirà un correo con el proceso de cambio de clave.</label>
+						<div class="input-group margin-bottom-sm" style="margin-bottom: 10px;">
+   						<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+   						<input id="forgotuser" class="form-control" type="email" placeholder="Email" required>
+ 						</div>
+			      <button type="submit" class="btn btn-primary btn-block btn-flat" id="forgotSubmit">Enviar al Correo</button>
+			    </fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+		{% include "market/banner.html" %}
+
+		{% include "market/footer.html" %}
+
+		{% include "market/scripts.html" %}
+
+		<script src="{% static "js/codepen.js" %}"></script>
+		<script src="{% static "js/forgot.js" %}"></script>
+
+
+
+
+</body>
+</html>
