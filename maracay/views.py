@@ -488,3 +488,13 @@ def ForgotMail(request):
         return render(request, 'market/forgotPasswordFinal.html', {'token':request.GET['token']})
     else:
         print ("poner un pagina de rebotado")
+
+def Detail(request):
+    if 'code' in request.GET:
+        _detailproducts = backStart(request)
+        _detailproducts.detailProducts()
+        data = _detailproducts.response_data
+        return render(request, 'market/detailProduct.html', {'data':data['data'],'data2':data['data2'][0]})
+    else:
+        data = {'code':500,'message':'Codigo invalido'}
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')

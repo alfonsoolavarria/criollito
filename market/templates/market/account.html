@@ -8,7 +8,7 @@
 	<div id="places">
 		<div class="container" style="margin-top: 160px;">
 			<h4 style="text-align:center;margin-bottom: 3%;"><b>Historial de Compras</b></h4>
-			<div class="row">
+			<div class="row" style="text-align: center;">
 				<div class="col-md-2">
 					<img src="/static/images/historial.png" alt="" style="margin-left:10%;margin-top: -10%;" width="110" height="120">
 				</div>
@@ -29,23 +29,23 @@
 				</div>
 			</div>
 			<div class="row" style="margin-bottom: 60px;">
-				<div class="col-md-2">
-
-				</div>
 				{%for a in data%}
+					<div class="col-md-2">
+
+					</div>
 					<div class="col-md-3">
-							{{a.code_purchase}}<br>
+							<a href="/detalles/?code={{a.code_purchase}}" data-toggle="tooltip" title="Detalles">{{a.code_purchase}}</a>
 					</div>
 					<div class="col-md-2">
 							{{a.start_date}}<br>
 					</div>
-					<div class="col-md-1">
+					<div class="col-md-1" style="text-align: center;">
 							800{{a.total}}<br>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" style="text-align: center;">
 							{{a.payment_type}}<br>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-2" style="text-align: center;">
 						{%if a.state == 1%}
 							<span class="badge badge-danger">Anulada</span>
 						{%elif a.state == 2%}

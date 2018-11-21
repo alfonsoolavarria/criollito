@@ -4,7 +4,7 @@ from .views import (Maracay, Account, Conditions,Login,Logout,Profile, Help, We,
     Places, Payment, Delivery, ControlAdmin, AllProducts,FrigorificoProducts,
     EnlatadosProducts,ViveresProducts, CartShopping, CartOrder, ConfimationOrder,HelpForm,
     CartOrderEntrega,Restore,Forgot,ForgotMail,AllProductsAdmin,ViveresProductsAdmin,
-    FrigorificoProductsAdmin,EnlatadosProductsAdmin)
+    FrigorificoProductsAdmin,EnlatadosProductsAdmin,Detail)
 from django.conf import settings
 from django.conf.urls import url
 from maracay import verificacion_compras,agrega_costo
@@ -44,6 +44,8 @@ urlpatterns = [
     url(r'^orden/entrega/$', csrf_exempt(CartOrderEntrega), name='cartsorderentrega'),
     #confirmacion de pedido
     url(r'^confirmacion/$', csrf_exempt(ConfimationOrder), name='confirmacioncompra'),
+    #detales de la compra
+    url(r'^detalles/$', csrf_exempt(Detail), name='detail'),
 
 
 ]

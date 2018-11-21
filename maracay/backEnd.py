@@ -137,6 +137,32 @@ class backStart():
         thread = Thread(target = hilo2)
         thread.start()
 
+    def detailProducts(self):
+        print (self._request.user.id)
+        productos = PurchaseConfirmation.objects.filter(code=self._request.GET['code'])
+        totalGeneral=0
+        for value in productos:
+            totalGeneral = totalGeneral+(float(value.product.price)*int(value.cant_product))
+            self.response_data['data'].append({
+                'payment_type':value.payment_type,
+                'code':value.code,
+                'confirmation':value.confirmation,
+                'start_date':value.start_date,
+                'name':value.product.name,
+                'price':value.product.price,
+                'image':value.product.image,
+                'total':float(value.product.price)*int(value.cant_product),
+                'cant_product':value.cant_product,
+            })
+
+        totalCompleto = totalGeneral+Tools.objects.get(pk=1).costoenvio
+        self.response_data['data2'].append({
+            'totalGeneral':totalGeneral,
+            'totalCompleto':totalCompleto,
+            'direccion':Profile.objects.get(user=self._request.user.id).direction,
+            'costoenvio':Tools.objects.get(pk=1).costoenvio,
+        })
+
 class profileBackend():
     def __init__(self, request):
         self._request = request
