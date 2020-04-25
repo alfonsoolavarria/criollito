@@ -138,11 +138,10 @@
   <script>
 		var listPriceTotal = 0;
     var carrito = JSON.parse(localStorage.getItem("carrito"));
-		console.log(carrito);
 		if (carrito.length<1) {
 			$(".wrap-table-shopping-cart").css("visibility","hidden");
 			//$(".twoColum").css("visibility","hidden");
-			$(".wrap-table-shopping-cart").after("<h4 style='text-align:center;'>Aún no hay artículos en su carrito, anda y <a href='/'>compra</a></h4>");
+			$(".wrap-table-shopping-cart").after("<h4 style='text-align:center;'>Aún no hay artículos en su carrito, anda y <a href='/all'>compra</a></h4>");
 			$("#paymentBox").remove();
 		}else{
 			for (var i = 0; i < carrito.length; i++) {

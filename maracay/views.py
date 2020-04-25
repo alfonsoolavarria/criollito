@@ -13,8 +13,9 @@ from django.core.cache import cache
 from django.conf import settings
 from threading import Thread
 from maracay.models import Tools, Profile as ProfileDB, PurchaseConfirmation, TokenPassword
-from maracay import get_client_ip
-import json,random, string
+from maracay import get_client_ip, config
+import json,random, string, datetime
+from django.contrib import admin
 
 # Create your views here.
 #Main Class
@@ -33,8 +34,9 @@ class Maracay(TemplateView):
             paginator = Paginator(contact_list, 10) # Show 25 contacts per page
             page = request.GET.get('page')
             contacts = paginator.get_page(page)
-
-            return render(request, 'market/index.html',{'contacts':contacts,'data':json.dumps(data['data'])})
+            print ("contacts",contacts)
+            direction = request.build_absolute_uri()+'images/images/'
+            return render(request, 'market/index.html',{'direction':direction,'contacts':contacts,'data':json.dumps(data['data'])})
         '''else:
             print ("22222")
             data = _allproducts.response_data
@@ -112,7 +114,7 @@ class Logout(View):
         _allproducts.get('all')
         data = _allproducts.response_data
         data['code'] = _allproducts.code
-        return render(request, 'market/index.html',{'data':data['data'][0]})
+        return render(request, 'market/index.html',{'data':data['data'][0] if data['data'] else {} })
 
 
 class Profile(View):
@@ -208,14 +210,20 @@ def CartShopping(request):
                 'rif':dataUser.user_profile.rif,
                 'localphone':dataUser.user_profile.localphone,
                 'reference':dataUser.user_profile.reference,
-                'costoenvio':Tools.objects.get(pk=1).costoenvio,
+                'costoenvio':Tools.objects.all().first().costoenvio,
                 'code':200
             })
         except Exception as e:
             print (e)
-            return render(request, 'market/cartshopping.html', {'costoenvio':Tools.objects.get(pk=1).costoenvio})
+            return render(request, 'market/cartshopping.html', {'costoenvio':Tools.objects.all().first().costoenvio})
     else:
-        return render(request, 'market/cartshopping.html', {'costoenvio':Tools.objects.get(pk=1).costoenvio})
+        try:
+            return render(request, 'market/cartshopping.html', {'costoenvio':Tools.objects.all().first().costoenvio})
+        except Tools.DoesNotExist:
+            data = {'costoenvio':config.COSTO_ENVIO,'create_at':datetime.datetime.now()}
+            costo = Tools(**data)
+            costo.save()
+            return HttpResponseRedirect("/")
 
 
 #Section Filters
@@ -348,7 +356,7 @@ def CartOrder(request):
             'rif':dataUser.user_profile.rif,
             'localphone':dataUser.user_profile.localphone,
             'reference':dataUser.user_profile.reference,
-            'costoenvio':Tools.objects.get(pk=1).costoenvio,
+            'costoenvio':Tools.objects.all().first().costoenvio,
             'code':200
             }
         except Exception as e:
@@ -366,7 +374,7 @@ def ConfimationOrder(request):
     'user':dataUser.id,
     'name':dataUser.first_name,
     'email':dataUser.email,
-    'costoenvio':Tools.objects.get(pk=1).costoenvio,
+    'costoenvio':Tools.objects.all().firts().costoenvio,
     'code':200,
     'compra':[],
     'tipoPago':'',

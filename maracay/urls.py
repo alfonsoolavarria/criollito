@@ -50,7 +50,7 @@ urlpatterns = [
 
 ]
 #proceso trabajoRecursivo
-verificacion_compras()
+#verificacion_compras()
 
 #proces de agregar costo de envio
-agrega_costo()
+#agrega_costo()
