@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include "market/head.html" %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body class="animsition" translate="no">
+	{% include "market/header.html" %}
+  <!-- -->
+  <div id="help">
+		<div class="container" style="margin-top:10%;">
+			<div class="row">
+				<div class="col-md-4" style="margin-bottom:10%;">
+						<h4 style="text-align:center;margin-bottom: 3%;"><b>Sobre Criollitos</b></h4>
+						<div class="section1">
+							<div class="icon">
+								<img src="/static/images/celcontacto.jpg" alt="">
+							</div>
+							<div class="data" style="margin-left: 16%;width: 50%;margin-top: -8%;">
+								<label for="">Números de Contacto:<br>04121231212/02431231212</label>
+							</div>
+						</div>
+						<div class="section2">
+							<div class="icon">
+								<img src="/static/images/correohelp.jpg" alt="">
+							</div>
+							<div class="data" style="margin-left: 19%;width: 50%;margin-top: -16%;">
+								<label for="">Email de Contacto:<br>servicio@criollitos.com</label>
+							</div>
+						</div>
+				</div>
+			<div class="col-md-8" style="border: 1px solid;border-radius: 2px;">
+				<h3 style="text-align:center;"><b>Contáctanos</b></h3>
+				<form class="form-horizontal" role="form"><label id="token" style="visibility:hidden;">{% csrf_token %}</label>
+				  <div class="form-group">
+				    <label for="ejemplo_email_3" class="col-lg-2 control-label">Asunto</label>
+				    <div class="col-lg-10">
+				      <select class="form-control" id="asuntoSelect" name="">
+				      	<option value="Pagos-Transferencias">Pagos-Transferencias</option>
+				      	<option value="Servicio al Cliente">Servicio al Cliente</option>
+				      	<option value="Otros">Otros</option>
+				      </select>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="ejemplo_password_3" class="col-lg-2 control-label">Email</label>
+				    <div class="col-lg-10">
+				      <input type="email" class="form-control" id="ejemplo_password_3"
+				             placeholder="Email">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="ejemplo_password_4" class="col-lg-2 control-label">Mensaje</label>
+				    <div class="col-lg-10">
+				      <textarea class="form-control" id="messageText" name="message" placeholder="¿Cómo le podemos ayudar?" rows="3"></textarea>
+				    </div>
+				  </div>
+				</form>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" id="helpForm">
+							Enviar
+						</button>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+  </div>
+	{% include "market/banner.html" %}
+  <!-- -->
+  {% include "market/footer.html" %}
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+		{% include "market/scripts.html" %}
+		<script src="{% static "js/helpform.js" %}"></script>
+</body>
+</html>

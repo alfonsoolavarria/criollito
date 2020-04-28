@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include "market/head.html" %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body class="animsition" translate="no">
+	{% include "market/header.html" %}
+  <!-- -->
+  <div id="delivery">
+		<div class="container" style="margin-top: 160px;">
+			<h4 style="text-align:center;margin-bottom: 3%;"><b>Entregas - Delivery</b></h4>
+			<div class="row" style="margin-bottom: 60px;">
+				<div class="col-md-3">
+					<img src="/static/images/delivery2.png" alt="" style="margin-left:10%;margin-top: -10%;" width="190" height="150">
+				</div>
+				<div class="col-md-9">
+					<p style="text-align: justify;"><b>Criollitos Market, C.A,</b> contamos con un servicio de transporte según la compra
+						que hagas y en un tiempo aproximado de 24horas, ya confirmado el pedido de su compra se <b>lo llevamos hasta tu casa</b>.
+					Para más información revise el <a href="/places/">área de cobertura</a> de nuestras entregas.</p>
+				</div>
+			</div>
+	  </div>
+
+  </div>
+	{% include "market/banner.html" %}
+  <!-- -->
+  {% include "market/footer.html" %}
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+		{% include "market/scripts.html" %}
+</body>
+</html>
